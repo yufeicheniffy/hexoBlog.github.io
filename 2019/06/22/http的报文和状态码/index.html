@@ -5,15 +5,23 @@
   
 
   
-  <title>Hexo</title>
+  <title>http的报文和状态码 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://yufeicheniffy.github.io/hexoBlog.github.io/index.html">
+  <meta name="description" content="前言HTTP作为一个应用层协议，了解了它的报文与状态码后就可以有基础的认识了。 日后可以随着工作逐渐深入。 面向读者零基础想对HTTP有快速了解的。 #1. 什么是HTTP？HTTP 即HyperText Transfer Protocol， 超文本传输协议。  什么是HyperText？ 超文本（英语：Hypertext）是一种可以显示在计算机显示器或其他电子设备的文本，其中的文字包含有可以链接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http的报文和状态码">
+<meta property="og:url" content="https://yufeicheniffy.github.io/hexoBlog.github.io/2019/06/22/http的报文和状态码/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言HTTP作为一个应用层协议，了解了它的报文与状态码后就可以有基础的认识了。 日后可以随着工作逐渐深入。 面向读者零基础想对HTTP有快速了解的。 #1. 什么是HTTP？HTTP 即HyperText Transfer Protocol， 超文本传输协议。  什么是HyperText？ 超文本（英语：Hypertext）是一种可以显示在计算机显示器或其他电子设备的文本，其中的文字包含有可以链接">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18267594-d2b4aaed25391326.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18267594-5d8e2b02b02c023e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18267594-952cb71136d2d24b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-06-22T01:21:04.934Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="http的报文和状态码">
+<meta name="twitter:description" content="前言HTTP作为一个应用层协议，了解了它的报文与状态码后就可以有基础的认识了。 日后可以随着工作逐渐深入。 面向读者零基础想对HTTP有快速了解的。 #1. 什么是HTTP？HTTP 即HyperText Transfer Protocol， 超文本传输协议。  什么是HyperText？ 超文本（英语：Hypertext）是一种可以显示在计算机显示器或其他电子设备的文本，其中的文字包含有可以链接">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/18267594-d2b4aaed25391326.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternate" href="/hexoBlog.github.io/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -60,62 +68,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Git常用命令与场景" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/hexoBlog.github.io/2019/06/22/Git常用命令与场景/" class="article-date">
-  <time datetime="2019-06-22T00:45:42.000Z" itemprop="datePublished">2019-06-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/hexoBlog.github.io/2019/06/22/Git常用命令与场景/">Git常用命令与场景</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Git 目前已经是很知名的版本管理软件了，作为一名程序猿是必须知道的，但是自己在学习Git的过程中总是发现：命令太多，强行学习并没有什么用，而且日常使用中其实只会用到其中的<strong>一部分</strong>。在以后的工作中需要什么功能<strong>Google</strong>一下就好了。所以这篇文章会列出我常用的功能和相应场景，尽量满足覆盖日常工作内容。随时更新。</p>
-<h1 id="面向的读者"><a href="#面向的读者" class="headerlink" title="面向的读者"></a>面向的读者</h1><p>对Git和Github有点了解，但是苦于命令的。<br>如果不了解，维基百科是个好地方：）</p>
-<h1 id="在阅读前需要知道的：Git的分区"><a href="#在阅读前需要知道的：Git的分区" class="headerlink" title="在阅读前需要知道的：Git的分区"></a>在阅读前需要知道的：Git的分区</h1><p>Git中第一个需要了解是的Git的分区。<br><img src="https://upload-images.jianshu.io/upload_images/18267594-484cbc17eb1e4d14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><em>图片转自：<a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html</a> 阮一峰的博客</em></p>
-<h4 id="各分区的解释"><a href="#各分区的解释" class="headerlink" title="各分区的解释"></a>各分区的解释</h4><ul>
-<li>Remote区<br>Remote区就是远程仓库，你和小伙伴们都能访问的地方，也是小伙伴获得你代码的地方。你最终的完成代码应该放到这里。位于<strong>网络上</strong>。</li>
-<li>WorkSpace 区<br>你写代码的地方，位于你的<strong>本机</strong>。</li>
-<li>Repository区<br>同样位于<strong>本机</strong>。按道理，只要有Remote区和WorkSpace区就能做到将自己的代码上传并且完成版本控制了。为什么中间要有一个Repository区?因为自己的代码往往是个草稿，需要经过多次修改，放入Repository区的才是成品。我们希望与Remote打交道时是深思熟虑后完整的程序，而不是带有很多BUG的你的第一次作品。 所以Repository也可以理解为<strong>待上传区</strong>。 </li>
-</ul>
-<p>故而我们可以这样理解三个区: </p>
-<p>workspace:草稿 -&gt; Repository: 作品 -&gt; Remote：共享区</p>
-<h1 id="第一步：创建这三个区"><a href="#第一步：创建这三个区" class="headerlink" title="第一步：创建这三个区"></a>第一步：创建这三个区</h1><p>有两种典型方法。</p>
-<h4 id="1：先在网络上创建Reomte，再创建本地仓库"><a href="#1：先在网络上创建Reomte，再创建本地仓库" class="headerlink" title="1：先在网络上创建Reomte，再创建本地仓库."></a>1：先在网络上创建Reomte，再创建本地仓库.</h4><p>流程：去github创建远程仓库（readme+license），之后clone到本地即可。</p>
-<h4 id="2：先创建本地仓库，在提交到远程仓库。"><a href="#2：先创建本地仓库，在提交到远程仓库。" class="headerlink" title="2：先创建本地仓库，在提交到远程仓库。"></a>2：先创建本地仓库，在提交到远程仓库。</h4><ol>
-<li>git init ： 创建本地仓库</li>
-<li>github创建空仓库。</li>
-<li>git remote add ssh/http link</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://yufeicheniffy.github.io/hexoBlog.github.io/2019/06/22/Git常用命令与场景/" data-id="cjx6u7wqk0000zmp8fk4rg2pk" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-http的报文和状态码" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-http的报文和状态码" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/hexoBlog.github.io/2019/06/22/http的报文和状态码/" class="article-date">
   <time datetime="2019-06-22T00:00:34.000Z" itemprop="datePublished">2019-06-22</time>
@@ -128,8 +81,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/hexoBlog.github.io/2019/06/22/http的报文和状态码/">http的报文和状态码</a>
+    <h1 class="article-title" itemprop="name">
+      http的报文和状态码
     </h1>
   
 
@@ -266,254 +219,28 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-Html标签" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/hexoBlog.github.io/2019/06/17/Html标签/" class="article-date">
-  <time datetime="2019-06-17T22:33:31.000Z" itemprop="datePublished">2019-06-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/hexoBlog.github.io/2019/06/22/Git常用命令与场景/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
+          Git常用命令与场景
+        
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/hexoBlog.github.io/2019/06/17/Html标签/">细谈Html常用标签</a>
-    </h1>
   
+    <a href="/hexoBlog.github.io/2019/06/17/Html标签/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">细谈Html常用标签</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>HTML的标签很多，让人摸不着头脑。很多人纵向去学，想要实现什么功能/结构就去查询相应的标签。<br>这样确实是一种方法，然而横向比较所有标签能够帮助我们把HTML的标签织成网，加深理解。<br>本文将从标签的分类引入，介绍不同类的常用标签，加深对标签的理解和记忆。</p>
-<h1 id="面向读者"><a href="#面向读者" class="headerlink" title="面向读者"></a>面向读者</h1><p>HTML新手，至少知道HTML是什么。</p>
-<h1 id="从HTML的结构说起"><a href="#从HTML的结构说起" class="headerlink" title="从HTML的结构说起"></a>从HTML的结构说起</h1><p>HTML的HELLO WORLD文档可以看出其结构是非常简单的：</p>
-<blockquote>
-<p>&lt;!DOCTYPE html&gt; <em>文档声明</em><br><br>&lt;html&gt;<em>HTML声明</em><br><br>&lt;head&gt;<em>头部声明</em><br><br>&lt;/head&gt;<br><br>&lt;body&gt;<em>主体声明</em><br><br>&lt;/body&gt;<em>文档声明</em><br><br>&lt;/html&gt;<br></p>
-</blockquote>
-<h2 id="头部声明HEAD"><a href="#头部声明HEAD" class="headerlink" title="头部声明HEAD"></a>头部声明HEAD</h2><p>head内是html的头部信息，里面规定了本文档的元数据/METADATA（描述数据的数据）。<br>可以包含下列信息：</p>
-<ol>
-<li>HTML的METADATA类标签<br></li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>功能</th>
-<th>常见属性</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>base</td>
-<td>指定默认URL</td>
-<td>href target</td>
-</tr>
-<tr>
-<td>link</td>
-<td>制定外部文件，声明关系</td>
-<td>href rel</td>
-</tr>
-<tr>
-<td>noscript</td>
-<td>不能执行JS时，显示的内容</td>
-<td></td>
-</tr>
-<tr>
-<td>script</td>
-<td>嵌入或者链接可执行代码</td>
-<td>src</td>
-</tr>
-<tr>
-<td>style</td>
-<td>样式信息，CSS</td>
-<td>全局属性</td>
-</tr>
-<tr>
-<td>title</td>
-<td>网页的标题</td>
-<td>只有全局属性</td>
-</tr>
-<tr>
-<td>meta</td>
-<td>其他信息</td>
-<td></td>
-</tr>
-</tbody></table>
-<ol start="2">
-<li><p>SOCIAL MEDIA内容<br><br>嵌入facebook与twitter</p>
-</li>
-<li><p>声明浏览器或者平台<br><br>平台： APPLE iOS， Android<br>浏览器: chrome，Firefox等</p>
-</li>
-<li><p>其他细类，<a href="https://github.com/joshbuchea/HEAD#twitter-card" target="_blank" rel="noopener">详细见此</a></p>
-</li>
-</ol>
-<p>可以看出，头部信息包含该HTML的一些描述性信息，里面的内容并不会直接显示到页面上。 头部信息可包含的<br>标签是METADATA类。后面BODY里的内容会显示到页面上，也有相对应类别的标签。<br>从这里可以看出，不同的标签有着不同的功能，那么我们将有着类似功能的标签整合在一起进行对比学习，就可以达到横向学习的目的。</p>
-<h1 id="标签的分类"><a href="#标签的分类" class="headerlink" title="标签的分类"></a>标签的分类</h1><p>标签可以按不同的划分规则划分，比如block标签，inline标签。 这里我们介绍<strong>内容分类</strong>。
-首先，一个标签可以属于零个，一个，或者多个类容分类。 这里的内容分类类似接口的概念，<br>即一个内容分类表明了一个共性集合，只要这个标签满足了这些共性，这个标签就属于这个内容分类。<br><img src="https://mdn.mozillademos.org/files/3704/Content_categories_venn.png"><br>从内容分类横向学习标签，可以加深对每个标签的理解。<br>如图，内容分类可以分为7大类：</p>
-<ul>
-<li>Metadata类<br><br>功能: <ol>
-<li>修饰后续文档的表现和行为。比如style</li>
-<li>设置与其他文件的链接。 比如link</li>
-<li>其他信息</li>
-</ol>
-</li>
-</ul>
-<p>这类标签主要就是<strong>元数据</strong>。</p>
-<table>
-<thead>
-<tr>
-<th>常见标签</th>
-<th>功能</th>
-<th>常用属性</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>base</td>
-<td>指定默认URL</td>
-<td>href target</td>
-</tr>
-<tr>
-<td>link</td>
-<td>指定外部文件和本文件的关系，如指定stylesheet</td>
-<td>href rel</td>
-</tr>
-<tr>
-<td>noscript</td>
-<td>不能加载JS，则显示指定内容</td>
-<td></td>
-</tr>
-<tr>
-<td>script</td>
-<td>嵌入或链接可执行代码</td>
-<td>src</td>
-</tr>
-<tr>
-<td>style</td>
-<td>样式信息，CSS</td>
-<td>样式信息，CSS</td>
-</tr>
-<tr>
-<td>title</td>
-<td>网页的标题</td>
-<td>只包含全局属性</td>
-</tr>
-<tr>
-<td>meta</td>
-<td>其他任何不属于上述标签的内容</td>
-<td></td>
-</tr>
-</tbody></table>
-<ul>
-<li>FlowContent类<br><br>功能：包含文本或者嵌入元素的类，就是我们<strong>需要展示的内容</strong>。</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>常见标签</th>
-<th>功能</th>
-<th>常用属性/TIPS</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>a</td>
-<td>锚标签，用于链接其他网页、位置等，详见日后更新</td>
-<td></td>
-</tr>
-<tr>
-<td>abbr</td>
-<td>缩写标签，鼠标放上后会显示全称</td>
-<td>title内放入全称</td>
-</tr>
-<tr>
-<td>adress</td>
-<td>地址标签</td>
-<td></td>
-</tr>
-<tr>
-<td>bdi</td>
-<td>文字方向标签，由于很多文字（如阿拉伯文，古代中文）是从右往左读的，所以我们文字也需要方向。<br>bdi是使用浏览器内置算法决定方向</td>
-<td></td>
-</tr>
-<tr>
-<td>bdo</td>
-<td>同上，自己制定方向</td>
-<td>dir</td>
-</tr>
-<tr>
-<td>details &gt; summary</td>
-<td>点击summary内容会展示details内容</td>
-<td></td>
-</tr>
-<tr>
-<td>embed</td>
-<td>嵌入外部应用</td>
-<td>type src</td>
-</tr>
-<tr>
-<td>object</td>
-<td>将外部资源嵌入浏览器</td>
-<td></td>
-</tr>
-<tr>
-<td>iframe</td>
-<td>嵌入其他页面</td>
-<td>embed，object与iframe区别？占坑更新</td>
-</tr>
-<tr>
-<td>figure</td>
-<td>带说明的图片img+figcaption+description</td>
-<td></td>
-</tr>
-<tr>
-<td>hgroup</td>
-<td>多个标题的组，一般用在连续标题下</td>
-<td></td>
-</tr>
-<tr>
-<td>ins，del</td>
-<td><ins>加入</ins>和<del>删除</del></td>
-<td></td>
-</tr>
-<tr>
-<td>kbd</td>
-<td>表示键盘按键</td>
-<td></td>
-</tr>
-<tr>
-<td>map&gt;area</td>
-<td>划分图片，可点击相应部分</td>
-<td></td>
-</tr>
-</tbody></table>
-<ul>
-<li>Sectioning content</li>
-<li>Heading content</li>
-<li>Pharsing content</li>
-<li>embedded content</li>
-<li>interactive content</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://yufeicheniffy.github.io/hexoBlog.github.io/2019/06/17/Html标签/" data-id="cjx6u7wqo0001zmp8vjwvsqt8" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-
 
 </section>
         

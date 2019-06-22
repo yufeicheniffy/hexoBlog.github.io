@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Git常用命令与场景 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言Git 目前已经是很知名的版本管理软件了，作为一名程序猿是必须知道的，但是自己在学习Git的过程中总是发现：命令太多，强行学习并没有什么用，而且日常使用中其实只会用到其中的一部分。在以后的工作中需要什么功能Google一下就好了。所以这篇文章会列出我常用的功能和相应场景，尽量满足覆盖日常工作内容。随时更新。 面向的读者对Git和Github有点了解，但是苦于命令的。如果不了解，维基百科是个好地">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git常用命令与场景">
+<meta property="og:url" content="https://yufeicheniffy.github.io/hexoBlog.github.io/2019/06/22/Git常用命令与场景/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言Git 目前已经是很知名的版本管理软件了，作为一名程序猿是必须知道的，但是自己在学习Git的过程中总是发现：命令太多，强行学习并没有什么用，而且日常使用中其实只会用到其中的一部分。在以后的工作中需要什么功能Google一下就好了。所以这篇文章会列出我常用的功能和相应场景，尽量满足覆盖日常工作内容。随时更新。 面向的读者对Git和Github有点了解，但是苦于命令的。如果不了解，维基百科是个好地">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/18267594-484cbc17eb1e4d14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-06-22T01:20:50.078Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git常用命令与场景">
+<meta name="twitter:description" content="前言Git 目前已经是很知名的版本管理软件了，作为一名程序猿是必须知道的，但是自己在学习Git的过程中总是发现：命令太多，强行学习并没有什么用，而且日常使用中其实只会用到其中的一部分。在以后的工作中需要什么功能Google一下就好了。所以这篇文章会列出我常用的功能和相应场景，尽量满足覆盖日常工作内容。随时更新。 面向的读者对Git和Github有点了解，但是苦于命令的。如果不了解，维基百科是个好地">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/18267594-484cbc17eb1e4d14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+    <link rel="alternate" href="/hexoBlog.github.io/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/hexoBlog.github.io/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/hexoBlog.github.io/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/hexoBlog.github.io/">Home</a>
+        
+          <a class="main-nav-link" href="/hexoBlog.github.io/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/hexoBlog.github.io/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yufeicheniffy.github.io/hexoBlog.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Git常用命令与场景" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/hexoBlog.github.io/2019/06/22/Git常用命令与场景/" class="article-date">
+  <time datetime="2019-06-22T00:45:42.000Z" itemprop="datePublished">2019-06-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Git常用命令与场景
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Git 目前已经是很知名的版本管理软件了，作为一名程序猿是必须知道的，但是自己在学习Git的过程中总是发现：命令太多，强行学习并没有什么用，而且日常使用中其实只会用到其中的<strong>一部分</strong>。在以后的工作中需要什么功能<strong>Google</strong>一下就好了。所以这篇文章会列出我常用的功能和相应场景，尽量满足覆盖日常工作内容。随时更新。</p>
+<h1 id="面向的读者"><a href="#面向的读者" class="headerlink" title="面向的读者"></a>面向的读者</h1><p>对Git和Github有点了解，但是苦于命令的。<br>如果不了解，维基百科是个好地方：）</p>
+<h1 id="在阅读前需要知道的：Git的分区"><a href="#在阅读前需要知道的：Git的分区" class="headerlink" title="在阅读前需要知道的：Git的分区"></a>在阅读前需要知道的：Git的分区</h1><p>Git中第一个需要了解是的Git的分区。<br><img src="https://upload-images.jianshu.io/upload_images/18267594-484cbc17eb1e4d14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><em>图片转自：<a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html</a> 阮一峰的博客</em></p>
+<h4 id="各分区的解释"><a href="#各分区的解释" class="headerlink" title="各分区的解释"></a>各分区的解释</h4><ul>
+<li>Remote区<br>Remote区就是远程仓库，你和小伙伴们都能访问的地方，也是小伙伴获得你代码的地方。你最终的完成代码应该放到这里。位于<strong>网络上</strong>。</li>
+<li>WorkSpace 区<br>你写代码的地方，位于你的<strong>本机</strong>。</li>
+<li>Repository区<br>同样位于<strong>本机</strong>。按道理，只要有Remote区和WorkSpace区就能做到将自己的代码上传并且完成版本控制了。为什么中间要有一个Repository区?因为自己的代码往往是个草稿，需要经过多次修改，放入Repository区的才是成品。我们希望与Remote打交道时是深思熟虑后完整的程序，而不是带有很多BUG的你的第一次作品。 所以Repository也可以理解为<strong>待上传区</strong>。 </li>
+</ul>
+<p>故而我们可以这样理解三个区: </p>
+<p>workspace:草稿 -&gt; Repository: 作品 -&gt; Remote：共享区</p>
+<h1 id="第一步：创建这三个区"><a href="#第一步：创建这三个区" class="headerlink" title="第一步：创建这三个区"></a>第一步：创建这三个区</h1><p>有两种典型方法。</p>
+<h4 id="1：先在网络上创建Reomte，再创建本地仓库"><a href="#1：先在网络上创建Reomte，再创建本地仓库" class="headerlink" title="1：先在网络上创建Reomte，再创建本地仓库."></a>1：先在网络上创建Reomte，再创建本地仓库.</h4><p>流程：去github创建远程仓库（readme+license），之后clone到本地即可。</p>
+<h4 id="2：先创建本地仓库，在提交到远程仓库。"><a href="#2：先创建本地仓库，在提交到远程仓库。" class="headerlink" title="2：先创建本地仓库，在提交到远程仓库。"></a>2：先创建本地仓库，在提交到远程仓库。</h4><ol>
+<li>git init ： 创建本地仓库</li>
+<li>github创建空仓库。</li>
+<li>git remote add ssh/http link</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://yufeicheniffy.github.io/hexoBlog.github.io/2019/06/22/Git常用命令与场景/" data-id="cjx6u7wqk0000zmp8fk4rg2pk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/hexoBlog.github.io/2019/06/22/http的报文和状态码/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">http的报文和状态码</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexoBlog.github.io/archives/2019/06/">June 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/hexoBlog.github.io/2019/06/22/Git常用命令与场景/">Git常用命令与场景</a>
+          </li>
+        
+          <li>
+            <a href="/hexoBlog.github.io/2019/06/22/http的报文和状态码/">http的报文和状态码</a>
+          </li>
+        
+          <li>
+            <a href="/hexoBlog.github.io/2019/06/17/Html标签/">细谈Html常用标签</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/hexoBlog.github.io/" class="mobile-nav-link">Home</a>
+  
+    <a href="/hexoBlog.github.io/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/hexoBlog.github.io/fancybox/jquery.fancybox.css">
+  <script src="/hexoBlog.github.io/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/hexoBlog.github.io/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
