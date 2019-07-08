@@ -62,6 +62,266 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-JS数据类型" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/hexoBlog.github.io/2019/07/08/JS数据类型/" class="article-date">
+  <time datetime="2019-07-08T20:43:40.000Z" itemprop="datePublished">2019-07-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/hexoBlog.github.io/2019/07/08/JS数据类型/">JS数据类型</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: JS数据类型<br>date: 2019-07-08 21:43:40</p>
+<h2 id="tags"><a href="#tags" class="headerlink" title="tags:"></a>tags:</h2><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>JavaScript 作为一门动态语言，其数据类型还是比较特别的，其中坑点不少，列出以备自己随时查看。</p>
+<h2 id="1-JavaScript的基本数据类型"><a href="#1-JavaScript的基本数据类型" class="headerlink" title="1. JavaScript的基本数据类型"></a>1. JavaScript的基本数据类型</h2><p>JavaScript 的基本数据类型目前包括七类： Number, String, Boolean, Undefined, Null, Symbol(ES6新增) 及 Object。 需要注意的是，JS支持的数据类型一直在扩充，比如新加入的<a href="https://www.w3.org/community/webassembly/" target="_blank" rel="noopener">WebAssembly</a>， <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Typed_arrays" target="_blank" rel="noopener">typed arrays</a> 。 </p>
+<h4 id="1-1-Number"><a href="#1-1-Number" class="headerlink" title="1.1. Number"></a>1.1. Number</h4><p>Number就是JavaScript中的数值类型。与其他语言不同， JS的数值类型一开始只有Number一种。 Number 就是IEEE754 所规定的 64-bit floating number。 所以Number并不区分整形与浮点型，一律用64位浮点数存储数值。</p>
+<h5 id="1-1-1-IEEE754"><a href="#1-1-1-IEEE754" class="headerlink" title="1.1.1 IEEE754"></a>1.1.1 IEEE754</h5><p>IEEE754 是一个浮点数标准，规定了浮点数应该如何存储。</p>
+<p><img src="img/618px-IEEE_754_Double_Floating_Point_Format.svg.png" alt="IEEE 754 Double Floating Point Format.svg"></p>
+<p>图片转自<a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format" target="_blank" rel="noopener">维基百科</a> </p>
+<p>其中的64位浮点数由三个部分组成： Sign(1 bit)， Exponent(11bit)， Fraction(52)。 即符号位，指数位和有效数字位（小数位）。 符号位规定了正负。指数位规定了浮动范围，即可以在2^n 内浮动。n=2^11=2048。 有效数字为存储有效数字。 简单来说，IEEE754就是科学记数法的变种。 </p>
+<p>具体来说，设真正的数值为T。 则T= <strong>(-1)^sign *(1.[fraction])*2^(exponent-offset)</strong> 。</p>
+<p>T的符号由 <strong>(-1)^sign</strong> 决定，所以0为正1为负。</p>
+<p>T的数值由 1.franction * 指数位 决定。这里引出两个有问题: 1. 为什么有一个“1.” 在小数部分前面?  2. offset 是什么？为什么要offset？</p>
+<p>前面提到过，IEEE754的核心思想还是科学记数法，而且是二进制的科学计数法。先想想我们熟悉的十进制科学记数法，它把一个数表示成a与10的n次幂相乘的形式（1≤a&lt;10，n为整数）。a的范围是[1，10) 是因为只要超出这个范围，就应该更变n了。 例如 0.9=9<em>10^-1。 同理，二进制的科学计数法a的范围是[1，2) ，所以其个位数一定是1。 这个1称为”The leading one”，因为肯定存在而且肯定是1，所以这里直接省略将其存在计算机内来节约空间。offset就是指数偏移量，我们想要表示0.0001需要1\</em>10^-4。 但是我们的指数为是没有符号位的，它是一个无符号整数，只能表示正。所以IEEE通过引入一个默认的偏移量表表示负指数，这个偏移量是2^exponent-1即1023。所以我们真正表示的数的指数位由存在计算机中的exponent和偏移量决定。最后的fraction就是小数部分，它的大小决定了我们能够存储的有效数字的精度。</p>
+<p>关于IEEE754和浮点数的存储还有很多值得注意的地方，我会在这篇文章中给出（占坑有空整理更新）。</p>
+<p>由于JS使用浮点数的形式来表示整数，所以其整数的范围就是fraction能表示的范围，即+/- 2^53(加上leading one)。0有特殊的表示。</p>
+<h5 id="1-1-2-Number支持进制"><a href="#1-1-2-Number支持进制" class="headerlink" title="1.1.2  Number支持进制"></a>1.1.2  Number支持进制</h5><p>Number是支持不同进制的，二进制由0b开头，八进制由0开头，十六进制由0x开头。</p>
+<p>即 0x10===16===014===0b10000</p>
+<p>JS中的进制转换可以通过parseInt()方法和toString()方法。 通过parseInt()转化为十进制再通过toString()转为其他进制。</p>
+<p>例如 parseInt(‘0x10’,16).toString(2) //“10000”。需要注意的是，JS 将0x10直接认定为一个合法的数字，所以parseInt(0x10,16) 的结果是22 不是16。整个机制是 parseInt(0x10,16) -&gt; parseInt(16,16) -&gt; 22。 </p>
+<h5 id="1-1-3-特殊的数字"><a href="#1-1-3-特殊的数字" class="headerlink" title="1.1.3 特殊的数字"></a>1.1.3 特殊的数字</h5><p>NaN infinity 正负零等，详见（占坑有空整理更新）。</p>
+<h2 id="1-2-Boolean"><a href="#1-2-Boolean" class="headerlink" title="1.2. Boolean"></a>1.2. Boolean</h2><ul>
+<li>boolean有两个值true/false ，区分大小写。 所以True和False 不是Boolean，可以作为标识符。</li>
+</ul>
+<h2 id="1-3-undefined-和-null"><a href="#1-3-undefined-和-null" class="headerlink" title="1.3. undefined 和 null"></a>1.3. undefined 和 null</h2><ul>
+<li><p>undefined 表示空值， 一般用于变量已声明但是未赋值。已声明未赋值变量调用会得到undefined值。未声明变量调用报错。typeof() <strong>不能</strong> 用来判断变量是否声明，未声明变量也会返回undefined. ** 所以建议，总是在声明变量时赋值。**</p>
+</li>
+<li><p>null表示空对象，typeof() 返回 “object”。一般用于表示这个变量的值是对象，但是现在为空。</p>
+</li>
+</ul>
+<h2 id="1-4-String"><a href="#1-4-String" class="headerlink" title="1.4. String"></a>1.4. String</h2><ul>
+<li><p>同其他很多语言一样，字符串不可变。</p>
+</li>
+<li><p>字符串默认只能写在一行内，分成多行将会报错。长字符串必须分成多行，可以在每一行的尾部使用反斜杠。反斜杠还有三种特殊用法。\OOO \xHH \uHHHH 分别表示unicode字符。 O与H分别为八进制和十六进制数字。</p>
+</li>
+<li><p>UTF-16 有两种长度：<br>对于码点在U+0000到U+FFFF之间的字符，长度为16位（即2个字节）；65536个字符<br>对于码点在U+10000到U+10FFFF之间的字符，JavaScript 总是认为它们是两个字符（length属性为2）。所以处理的时候，必须把这一点考虑在内，也就是说，JavaScript 返回的字符串长度可能是不正确的。<a href="https://javascript.ruanyifeng.com/grammar/string.html" target="_blank" rel="noopener">阮一峰</a> </p>
+</li>
+<li><p>Base64</p>
+<p>所谓 Base64 就是一种编码方法，可以将任意值转成 0～9、A～Z、a-z、+和/这64个字符组成的可打印字符。使用它的主要目的，不是为了加密，而是为了不出现特殊字符，简化程序的处理。也可以用来防范爬虫。</p>
+<ul>
+<li><p>btoa()：任意值转为 Base64      编码</p>
+</li>
+<li><p>atob()：Base64      编码转为原来的值</p>
+</li>
+<li><ul>
+<li>注意，这两个方法不适合非 ASCII 码的字符，会报错。要将非 ASCII 码字符转为 Base64       编码，必须中间插入一个转码环节，再使用这两个方法。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>encodeURIComponent(str)</p>
+<ul>
+<li>ecodeURIComponent(atob(str))<h2 id="1-5-Object"><a href="#1-5-Object" class="headerlink" title="1.5. Object"></a>1.5. Object</h2></li>
+</ul>
+</li>
+<li><p>对象就是hash表</p>
+</li>
+<li><p>键名会被自动转成字符串</p>
+</li>
+<li><p>在声明时，如果不符合标识符原则，需要加上“”，否则可以不加</p>
+</li>
+<li><p>普通键值对就是属性，值是函数就是方法。</p>
+</li>
+<li><ul>
+<li><p>属性可以动态创建（先声明后赋值）</p>
+</li>
+<li><p>属性的读取：</p>
+</li>
+<li><ul>
+<li>.读取：属性自动变为字符串，即.后必须是属性名</li>
+<li>[]读取：属性不加’’会被解释为变量</li>
+<li>数值键名只能用[]，因为会被当成小数点</li>
+</ul>
+</li>
+<li><p>delete</p>
+</li>
+<li><ul>
+<li>delete只能删除自己的属性</li>
+<li>只有该属性不能删除时才返回false</li>
+<li>返回true时，如果该属性不是自身属性的（继承而来）,该属性依然存在。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>ECMAS Object基本方法:</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>constructor</th>
+<th>构造方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hasownProperty</td>
+<td></td>
+</tr>
+<tr>
+<td>isPrototyprOf</td>
+<td></td>
+</tr>
+<tr>
+<td>propertyIsEnumerable</td>
+<td></td>
+</tr>
+<tr>
+<td>toLocaleString</td>
+<td>宿主环境是否支持</td>
+</tr>
+<tr>
+<td>toString</td>
+<td></td>
+</tr>
+<tr>
+<td>valueof</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>注意： BOM 和 DOM 并不用遵守EMCAS</p>
+<h2 id="2-类型转换"><a href="#2-类型转换" class="headerlink" title="2. 类型转换"></a>2. 类型转换</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>Number</th>
+<th>String</th>
+<th>Boolean</th>
+<th>null</th>
+<th>undefined</th>
+<th>Object</th>
+<th>symbol</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Numer</td>
+<td>\</td>
+<td>1,2,3</td>
+<td>1,2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>String</td>
+<td>1,2,3,4,5</td>
+<td>\</td>
+<td>1,2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>1,4,5</td>
+<td>1,2,3</td>
+<td>\</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>null</td>
+<td>1,4,5</td>
+<td>2,3</td>
+<td>1,2</td>
+<td>\</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>undifined</td>
+<td>1,4,5</td>
+<td>2,3</td>
+<td>1,2</td>
+<td></td>
+<td>\</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Object</td>
+<td>1,4,5</td>
+<td>1,2,3</td>
+<td>1,2</td>
+<td></td>
+<td></td>
+<td>\</td>
+<td></td>
+</tr>
+<tr>
+<td>symbol</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>\</td>
+</tr>
+</tbody></table>
+<p>转化为字符串方法:</p>
+<ol>
+<li>tostring()null 和 undefined 不行 number 可以带参表示进制</li>
+<li>String（）<br>有toString用toString。 null=”null” undefined=”undifined”</li>
+<li>+ “”</li>
+</ol>
+<p>转化为Boolean方法：</p>
+<ol>
+<li>Boolean（）</li>
+<li>！！x</li>
+</ol>
+<p>转化为Number（）方法：</p>
+<ol>
+<li>Number（） 类型转换</li>
+<li>parseInt（） 整数，八进制不支持，要跟参数8</li>
+<li>parseFloat（） 浮点数转换</li>
+<li>x - 0</li>
+<li>+ x</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://yufeicheniffy.github.io/hexoBlog.github.io/2019/07/08/JS数据类型/" data-id="cjxuv736f0002p4p85dv89eig" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Git常用命令与场景" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/hexoBlog.github.io/2019/06/22/Git常用命令与场景/" class="article-date">
@@ -105,7 +365,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://yufeicheniffy.github.io/hexoBlog.github.io/2019/06/22/Git常用命令与场景/" data-id="cjx6u7wqk0000zmp8fk4rg2pk" class="article-share-link">Share</a>
+      <a data-url="https://yufeicheniffy.github.io/hexoBlog.github.io/2019/06/22/Git常用命令与场景/" data-id="cjxuv73690000p4p8kyi16qdr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -260,7 +520,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://yufeicheniffy.github.io/hexoBlog.github.io/2019/06/22/http的报文和状态码/" data-id="cjx6u7wqq0002zmp8trje69yh" class="article-share-link">Share</a>
+      <a data-url="https://yufeicheniffy.github.io/hexoBlog.github.io/2019/06/22/http的报文和状态码/" data-id="cjxuv736h0003p4p8vp7ofkgi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -503,7 +763,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://yufeicheniffy.github.io/hexoBlog.github.io/2019/06/17/Html标签/" data-id="cjx6u7wqo0001zmp8vjwvsqt8" class="article-share-link">Share</a>
+      <a data-url="https://yufeicheniffy.github.io/hexoBlog.github.io/2019/06/17/Html标签/" data-id="cjxuv736e0001p4p86c9r6wme" class="article-share-link">Share</a>
       
       
     </footer>
@@ -531,7 +791,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexoBlog.github.io/archives/2019/06/">June 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexoBlog.github.io/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/hexoBlog.github.io/archives/2019/06/">June 2019</a></li></ul>
     </div>
   </div>
 
@@ -542,6 +802,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/hexoBlog.github.io/2019/07/08/JS数据类型/">JS数据类型</a>
+          </li>
         
           <li>
             <a href="/hexoBlog.github.io/2019/06/22/Git常用命令与场景/">Git常用命令与场景</a>
